@@ -77,16 +77,17 @@ public class MovieFacade {
         return query.getResultList();
     }
 
-    public void createMovie(EntityManagerFactory _emf, String title, int year) {
+    public Movie createMovie(EntityManagerFactory _emf, String title, int year) {
         EntityManager em = _emf.createEntityManager();
+        Movie movie = new Movie(year, title);
         try {
             em.getTransaction().begin();
-            em.persist(new Movie(year, title));
+            em.persist(movie);
             em.getTransaction().commit();
         }finally {
             em.close();
         }
-
+        return movie;
     }
 
 

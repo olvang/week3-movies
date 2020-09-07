@@ -7,10 +7,7 @@ import entities.Movie;
 import utils.EMF_Creator;
 import facades.MovieFacade;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +89,15 @@ public class MovieResource {
             employeesDTOS.add(convertToDto(movie));
         }
         return new Gson().toJson(employeesDTOS);
+    }
+
+    @POST
+    @Path("/year/{title}/{year}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String createMovie(@PathParam("title") String title,@PathParam("year") Integer year) {
+        Movie movie = FACADE.createMovie(EMF, title, year);
+
+        return new Gson().toJson(convertToDto(movie));
     }
 
     private MovieDTO convertToDto(Movie movie) {
