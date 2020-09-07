@@ -92,7 +92,7 @@ public class MovieResource {
     }
 
     @POST
-    @Path("/year/{title}/{year}")
+    @Path("/{title}/{year}")
     @Produces({MediaType.APPLICATION_JSON})
     public String createMovie(@PathParam("title") String title,@PathParam("year") Integer year) {
         Movie movie = FACADE.createMovie(EMF, title, year);
