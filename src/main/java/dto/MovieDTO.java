@@ -3,7 +3,7 @@ package dto;
 import entities.Movie;
 
 public class MovieDTO {
-    private Long id;
+    private int id;
     private int year;
     private String title;
 
