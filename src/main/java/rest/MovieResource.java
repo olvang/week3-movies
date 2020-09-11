@@ -100,9 +100,19 @@ public class MovieResource {
 
         return new Gson().toJson(convertToDto(movie));
     }
+    
+    @POST
+    @Path("/actor/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String addActorToMovie(@PathParam("id") int id) {
+        Movie movie = FACADE.addActorToMovie(EMF, id);
+
+        return new Gson().toJson(convertToDto(movie));
+    }
 
     private MovieDTO convertToDto(Movie movie) {
         MovieDTO movieDTO = new MovieDTO(movie);
         return movieDTO;
     }
+    
 }

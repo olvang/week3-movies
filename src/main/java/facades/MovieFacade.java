@@ -7,7 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -96,6 +99,25 @@ public class MovieFacade {
         return movie;
     }
 
-
+    public Movie addActorToMovie(EntityManagerFactory _emf, int id) {
+        EntityManager em = _emf.createEntityManager();
+        
+        //Hardcoded for now
+        Actor actor = new Actor("New Actor", ThreadLocalRandom.current().nextInt(10, 99));
+        List<Actor> actors = new ArrayList<>();
+        actors.add(actor);
+        
+        Movie movie = em.find(Movie.class,id);
+        movie.setActors(actors);
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(movie);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+        return movie;
+    }
 
 }
