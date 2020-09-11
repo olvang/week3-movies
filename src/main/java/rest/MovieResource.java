@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.MovieDTO;
+import entities.Actor;
 import entities.Movie;
 import utils.EMF_Creator;
 import facades.MovieFacade;
@@ -79,7 +80,7 @@ public class MovieResource {
     @Path("/year/{year}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getByYear(@PathParam("year") String year) {
+    public String getByYear(@PathParam("year") int year) {
         List<Movie> movies = FACADE.getMoviesByYear(EMF, year);
         if(movies.isEmpty()) return new Gson().toJson("Not found");
 
@@ -95,7 +96,7 @@ public class MovieResource {
     @Path("/{title}/{year}")
     @Produces({MediaType.APPLICATION_JSON})
     public String createMovie(@PathParam("title") String title,@PathParam("year") Integer year) {
-        Movie movie = FACADE.createMovie(EMF, title, year);
+        Movie movie = FACADE.createMovie(EMF, title, year, new ArrayList<Actor>());
 
         return new Gson().toJson(convertToDto(movie));
     }

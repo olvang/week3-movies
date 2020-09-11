@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Actor;
 import entities.Movie;
 
 import javax.persistence.EntityManager;
@@ -38,7 +39,6 @@ public class MovieFacade {
         return emf.createEntityManager();
     }
     
-    //TODO Remove/Change this before use
     public long getMovieCount(){
         EntityManager em = emf.createEntityManager();
         try{
@@ -48,6 +48,12 @@ public class MovieFacade {
             em.close();
         }
         
+    }
+    
+    public List<Actor> getActorsFromMovie(EntityManagerFactory _emf, int id){
+        EntityManager em = emf.createEntityManager();
+        Movie movie = em.find(Movie.class,id);
+        return movie.getActors();
     }
 
     public Movie getMovieById(EntityManagerFactory _emf, int id) {
@@ -59,12 +65,12 @@ public class MovieFacade {
 
     public List<Movie> getMoviesByTitle(EntityManagerFactory _emf, String title) {
         EntityManager em = _emf.createEntityManager();
-        Query query = em.createQuery("Select e FROM Movie e WHERE e.title = :title");
+        Query query = em.createQuery("Select m FROM Movie m WHERE m.title = :title");
         query.setParameter("title", title);
         return query.getResultList();
     }
 
-    public List<Movie> getMoviesByYear(EntityManagerFactory _emf, String year) {
+    public List<Movie> getMoviesByYear(EntityManagerFactory _emf, int year) {
         EntityManager em = _emf.createEntityManager();
         Query query = em.createQuery("Select e FROM Movie e WHERE e.year = :year");
         query.setParameter("year", year);
@@ -77,9 +83,9 @@ public class MovieFacade {
         return query.getResultList();
     }
 
-    public Movie createMovie(EntityManagerFactory _emf, String title, int year) {
+    public Movie createMovie(EntityManagerFactory _emf, String title, int year,  List<Actor> actors) {
         EntityManager em = _emf.createEntityManager();
-        Movie movie = new Movie(year, title);
+        Movie movie = new Movie(year, title, actors);
         try {
             em.getTransaction().begin();
             em.persist(movie);

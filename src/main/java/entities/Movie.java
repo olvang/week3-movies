@@ -1,8 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
-
 
 @Entity
 @NamedQueries({
@@ -11,20 +11,21 @@ import javax.persistence.*;
         @NamedQuery(name = "Movie.getByTitle", query = "SELECT m FROM Movie m WHERE m.title LIKE :title")
 })
 public class Movie implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int year;
     private String title;
+    private List<Actor> actors;
 
     public Movie() {
     }
 
-    public Movie(int year, String title) {
+    public Movie(int year, String title,  List<Actor> actors) {
         this.year = year;
         this.title = title;
+        this.actors = actors;
     }
 
     public int getYear() {
@@ -50,5 +51,15 @@ public class Movie implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    
 }
 
