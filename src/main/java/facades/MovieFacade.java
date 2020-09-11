@@ -99,11 +99,11 @@ public class MovieFacade {
         return movie;
     }
 
-    public Movie addActorToMovie(EntityManagerFactory _emf, int id) {
+    public Movie addActorToMovie(EntityManagerFactory _emf, int id, String name, int age) {
         EntityManager em = _emf.createEntityManager();
         
         //Hardcoded for now
-        Actor actor = new Actor("New Actor", ThreadLocalRandom.current().nextInt(10, 99));
+        Actor actor = new Actor(name, age);
         List<Actor> actors = new ArrayList<>();
         actors.add(actor);
         

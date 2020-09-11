@@ -102,10 +102,10 @@ public class MovieResource {
     }
     
     @POST
-    @Path("/actor/{id}")
+    @Path("/actor/{id}/{name}/{age}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String addActorToMovie(@PathParam("id") int id) {
-        Movie movie = FACADE.addActorToMovie(EMF, id);
+    public String addActorToMovie(@PathParam("id") int id,@PathParam("name") String name,@PathParam("age") int age) {
+        Movie movie = FACADE.addActorToMovie(EMF, id, name, age);
 
         return new Gson().toJson(convertToDto(movie));
     }
