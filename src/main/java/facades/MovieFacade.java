@@ -104,10 +104,11 @@ public class MovieFacade {
         
         //Hardcoded for now
         Actor actor = new Actor(name, age);
-        List<Actor> actors = new ArrayList<>();
-        actors.add(actor);
+        
         
         Movie movie = em.find(Movie.class,id);
+        List<Actor> actors = movie.getActors();
+        actors.add(actor);
         movie.setActors(actors);
         
         try {
