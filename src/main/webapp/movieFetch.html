@@ -10,26 +10,47 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-    table, th, td {
-  border: 1px solid black;
-}
+            table, th, td {
+                border: 1px solid black;
+            }
 
-</style>
+        </style>
     </head>
     <body>
         <h1>movieFetch</h1>
         <form id="form" action="#">
-        <input type="text" id="id" name="uid">
-        <input type="submit" id="single" value="Get Movie">
-        <input type="submit" id="all" value="Get All Movies">
-      </form> 
+            <input type="text" id="id" name="uid">
+            <input type="submit" id="single" value="Get Movie">
+            <input type="submit" id="all" value="Get All Movies">
+        </form> 
         <table>
             <thead><tr><th>id</th><th>Title</th><th>Year</th><th>Actors</th></tr></thead>
             <tbody id="tbody">
-                
-                
+
+
             </tbody>
         </table>
-      <script src="movieFetch.js"></script>
+        <h2>Add Movie</h2>
+        <form id="form" action="#">
+            <label>Title</label>
+            <input type="text" id="title" name="title"> </br>
+            <label>Year</label>
+            <input type="text" id="year" name="year">
+            </br>
+            <input type="submit" id="addMovie" value="Add Movie">
+        </form> 
+
+        <h2>Add Actor To Movie</h2>
+        <form id="form" action="#">
+            <label>Actor Name</label>
+            <input type="text" id="aname" name="aname"> </br>
+            <label>Age</label>
+            <input type="text" id="age" name="age"> </br>
+            <label>Movie ID</label>
+            <input type="text" id="mid" name="mid">
+            </br>
+            <input type="submit" id="addActorToMovie" value="Add Actor To Movie">
+        </form> 
+        <script src="movieFetch.js"></script>
     </body>
 </html>
